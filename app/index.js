@@ -1,13 +1,13 @@
 const app = require('./app')
-const http = require('http')
+const { createServer } = require('http')
 
 const port = 3001
 
-function onListening() {
+const onListening = () => {
   console.log('Listening on http://localhost:' + port)
 }
 
-function onError(error) {
+const onError = error => {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -26,10 +26,10 @@ function onError(error) {
   }
 }
 
-function createServer() {
-  const server = http.createServer(app)
+const Server = () => {
+  const server = createServer(app)
   server.listen(port, onListening)
   server.on('error', onError)
 }
 
-createServer()
+Server()
